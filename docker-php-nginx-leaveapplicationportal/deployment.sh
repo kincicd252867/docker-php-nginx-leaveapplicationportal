@@ -5,11 +5,11 @@ attempts=0
 max_attempts=12
 # Pull Nginx image
 echo "Pulling Nginx image..."
-docker pull kin252867/docker-nginx-leaveapplicationportal:ver1.1
+docker pull kin252867/docker-nginx-leaveapplicationportal:ver1.2
 
 # Pull PHP-FPM image
 echo "Pulling PHP-FPM image..."
-docker pull kin252867/docker-php-leaveapplicationportal:ver1.1
+docker pull kin252867/docker-php-leaveapplicationportal:ver1.2
 
 # Start all services using docker-compose
 echo "Starting services..."
