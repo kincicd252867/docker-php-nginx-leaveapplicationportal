@@ -1,0 +1,23 @@
+services:
+  nginx-leave-application-portal:
+    image: kin252867/docker-nginx-leaveapplicationportal:ver1.1
+    container_name: nginx-leave-application-portal
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: kin252867/docker-php-leaveapplicationportal:ver1.1
+    container_name: php-fpm
+    expose:
+      - 9000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

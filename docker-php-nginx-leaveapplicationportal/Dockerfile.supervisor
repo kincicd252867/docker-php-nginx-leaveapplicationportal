@@ -1,0 +1,30 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    nginx \
+    php8.3-fpm \
+    supervisor \
+    net-tools \
+    curl \
+    telnet \
+    dnsutils \
+    vim \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/html
+COPY --chown=www-data src/ /var/www/html/
+
+COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY config/default /etc/nginx/sites-enabled/default
+COPY config/www.conf /etc/php/8.3/fpm/pool.d/www.conf
+COPY config/php.ini /etc/php/8.3/fpm/php.ini
+COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN chown -R www-data:www-data /var/www/html /var/log/nginx /var/lib/nginx \
+    && chmod -R 755 /var/www/html /var/log/nginx /var/lib/nginx
+
+EXPOSE 80
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

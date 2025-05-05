@@ -1,0 +1,24 @@
+
+services:
+  mysql:
+    image: mysql:8.0.41
+    container_name: db-leave-application-portal
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Leaveportal
+      MYSQL_USER: nginx
+      MYSQL_PASSWORD: X!Ncb3b248kQr2
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./config/localdatabase.sql:/docker-entrypoint-initdb.d/localdatabase.sql
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+  
+networks:
+  app-network:
+    driver: bridge
