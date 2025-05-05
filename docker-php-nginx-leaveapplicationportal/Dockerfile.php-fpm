@@ -20,6 +20,7 @@ RUN apt-get update && \
     php8.3-xmlwriter \
     php8.3-zip \
     net-tools \
+    mysql-client \
     curl \
     telnet \
     dnsutils \
